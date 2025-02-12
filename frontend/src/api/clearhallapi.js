@@ -4,7 +4,7 @@ export const clearHallApi = async (inputData) => {
   try {
     const options = {
         method: 'POST',
-        url: 'https://seminar.rohankm.online/api/hall/clear_hall',
+        url: 'http://localhost:8000/api/hall/clear_hall',
         headers: {
           'content-type': 'application/json',
         },

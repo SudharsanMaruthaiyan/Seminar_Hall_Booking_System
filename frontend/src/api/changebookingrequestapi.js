@@ -4,7 +4,7 @@ export const changeBookingRequestApi = async (inputData) => {
   try {
     const options = {
         method: 'POST',
-        url: 'https://seminar.rohankm.online/api/booking/change_booking_request',
+        url: 'http://localhost:8000/api/booking/change_booking_request',
         headers: {
           'content-type': 'application/json',
         },

@@ -33,7 +33,7 @@ export function checkauth() {
     return async function checkAuthThunk(dispatch,getState) {
 
         try{
-                const response = await axios.get('https://seminar.rohankm.online/api/details', {
+                const response = await axios.get('http://localhost:8000/api/details', {
                     withCredentials: true
                     });
                 if(response.data.status === 'Authenticated'){

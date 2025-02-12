@@ -32,7 +32,7 @@ export default function AdminDepartmentRequest() {
     const get_department_requests = async()=> {
         setOpen(true);
         try{
-            const response = await axios.get("https://seminar.rohankm.online/api/department/show_department_requests", {
+            const response = await axios.get("http://localhost:8000/api/department/show_department_requests", {
                 withCredentials:true
             });
             const temp = response.data.requests.map((data)=>{

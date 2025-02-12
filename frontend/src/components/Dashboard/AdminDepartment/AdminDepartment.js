@@ -51,7 +51,7 @@ export default function AdminDepartment() {
     const get_departments = async ()=> {
         setOpen(true)
         try{
-            const response = await axios.get("https://seminar.rohankm.online/api/department/show_departments")
+            const response = await axios.get("http://localhost:8000/api/department/show_departments")
            const temp = response.data.departments.map((data)=> {
             return(
                 <Grid item xs={11} sm={6} md={6} lg={6} xl={6}>

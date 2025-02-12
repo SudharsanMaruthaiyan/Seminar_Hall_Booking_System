@@ -4,7 +4,7 @@ export const departmentLoginApi = async (inputData) => {
   try {
     const options = {
         method: 'POST',
-        url: 'https://seminar.rohankm.online/api/department_login',
+        url: 'http://localhost:8000/api/department_login',
         headers: {
           'content-type': 'application/json',
         },

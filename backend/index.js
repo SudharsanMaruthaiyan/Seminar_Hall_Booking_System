@@ -9,12 +9,12 @@ const departmentPassport = require('./config/department_passport');
 const details = require('./routes/constants');
 const cors = require('cors')
 const path = require('path');
+const connectDB = require('./config/mongoose');
 
 app.use(express.json());
 app.use(express.urlencoded());
 
-const allowedOrigins = ['http://localhost:3000',"https://seminar.rohankm.online"];
-
+// const allowedOrigins = ['http://localhost:3000',"https://seminar.rohankm.online"];
 
 // const corsOptions ={
 //     origin:allowedOrigins, 
@@ -22,24 +22,37 @@ const allowedOrigins = ['http://localhost:3000',"https://seminar.rohankm.online"
 //     optionSuccessStatus:200
 // }
 
+connectDB()
 
-const whitelist = ['http://localhost:3000', 'https://seminar.rohankm.online']
+const whitelist = ['http://localhost:3000']; // Only allow local frontend
+
 const corsOptions = {
-  origin:whitelist,
-  credentials:true
-}
+  origin: function (origin, callback) {
+    if (!origin || whitelist.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true, // Allow cookies and authentication headers
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+};
+
 app.use(cors(corsOptions));
 
 
 app.set('trust proxy', 1)
 app.use(session({
-    secret: 'rkm seminar',
-    resave: true,
-    saveUninitialized: true,
-    cookie: { maxAge:1000*60*60*24, sameSite:'none',secure:true},
-    store: MongoStore.create({ mongoUrl: `mongodb+srv://mohantyrohan:${details.MONGO_Password}@cluster0.llzjwsh.mongodb.net/seminar_hall_DB?retryWrites=true&w=majority`,collectionName:"sessions" }),
-  }))
-
+  secret: "yourSecretKey", // Change this to a strong secret key
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({
+      mongoUrl: `mongodb+srv://sudharsan6078:123@cluster0.xo0jy.mongodb.net/seminarHall`,
+      collectionName: "sessions"
+  }),
+  cookie: { secure: false } // Set `true` if using HTTPS
+}));
 
 
 app.use(adminPassport.initialize())
@@ -56,14 +69,10 @@ const rootPath = __dirname.substring(0, __dirname.length - 8);
 // app.use(express.static(""));
 app.use(express.static(rootPath + '/frontend/build'));
 // Any other routes should be handled by the React app
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(rootPath + '/frontend/build/index.html');
+  res.send("Api working...")
 });
-
-
-
-
-
 
 
 

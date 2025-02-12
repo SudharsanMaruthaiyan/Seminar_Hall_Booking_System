@@ -26,7 +26,7 @@ export default function Appbar() {
 
     const logout = async ()=> {
       try{
-        const res = await axios.get('https://seminar.rohankm.online/api/logout',{
+        const res = await axios.get('http://localhost:8000/api/logout',{
           withCredentials:true
         });
         dispatch(removeStatus());

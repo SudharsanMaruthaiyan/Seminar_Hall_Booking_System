@@ -44,7 +44,7 @@ export default function AdminHall() {
   const get_halls = async ()=>{
     setOpen(true)
     try{
-      const response = await axios.get('https://seminar.rohankm.online/api/hall/view_halls',{
+      const response = await axios.get('http://localhost:8000/api/hall/view_halls',{
         withCredentials:true
       })
       let temp = response.data.halls.map((data)=>{

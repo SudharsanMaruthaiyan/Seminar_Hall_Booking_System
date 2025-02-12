@@ -4,7 +4,7 @@ export const cancelDepartmentApi = async (inputData) => {
   try {
     const options = {
         method: 'POST',
-        url: 'https://seminar.rohankm.online/api/department/delete_department_request',
+        url: 'http://localhost:8000/api/department/delete_department_request',
         headers: {
           'content-type': 'application/json',
         },

@@ -23,7 +23,7 @@ export default function AdminBooking() {
     const get_booking_requests = async ()=>{
         setOpen(true)
         try{
-          const response = await axios.get('https://seminar.rohankm.online/api/booking/show_booking_requests',{
+          const response = await axios.get('http://localhost:8000/api/booking/show_booking_requests',{
             withCredentials:true
           })
           let temp = response.data.booking_requests.map((data)=>{
